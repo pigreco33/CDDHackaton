@@ -9,14 +9,27 @@ function Votazioni(){
                     " dc:relation ?relazione;  ocd:votanti ?votanti; ocd:richiestaFiducia ?richiestaFiducia; ocd:approvato ?approvato; ocd:favorevoli ?favorevoli;" +
                     "ocd:contrari ?contrari; ocd:astenuti ?astenuti ; <http://www.w3.org/2000/01/rdf-schema#label> ?label ;" +
                     "ocd:rif_leg ?rif_leg; ocd:votazioneSegreta ?votazioneSegreta ; ocd:votazioneFinale ?votazioneFinale " +
-                    "  } ORDER BY ASC(?date) LIMIT 100", function(err, res){
+                    "  } ORDER BY DESC(?date) LIMIT 100", function(err, res){
         res.results.bindings.forEach(function(row){
             console.log(row.title.value)
             InsMongo(row);
         })
+	 InsCurrentDate();
         console.log("End Lettura Votazioni");
     });
  };
+
+
+function InsCurrentDate(){
+  mongoClient.connect('mongodb://localhost:27017/hackathon', function(err, db) {
+        db.collection("log").insert({'type' :  'insertion','date':new Date()},  function(err, result) {
+            if(err){
+                console.log(err);}
+            db.close();
+        });
+    });
+}
+
 
 
 function InsMongo( row  ){
