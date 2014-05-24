@@ -121,7 +121,7 @@ dati aggiornati al: <?php print_r(strftime("%c", getLastInsertionDate()))?> <a h
 <h3>VOTAZIONI </h3>
 
 <div style="width:50px; margin-right: 20px; float: right">
-<form action="/logout.php">
+<form action="logout.php">
     <input type="submit" value="Logout">
 </form>
 </div>	
