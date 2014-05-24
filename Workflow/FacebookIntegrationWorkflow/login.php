@@ -1,7 +1,8 @@
 <?php 
 function checkLogin($u, $p)
 {
-	return  ($u==$p);
+	return  (md5($u)== 'e1ebf63719d391b4e880233be872f51f'
+		&& md5($p)=='078c007bd92ddec308ae2f5115c1775d');
 }
 
 if (isset($_POST['username']) && isset($_POST['password']))
